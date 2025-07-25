@@ -23,8 +23,8 @@ const ZO_HOUSES = [
   },
   {
     name: "Zo House Whitefield",
-    lat: 12.9725,
-    lng: 77.745,
+    lat: 12.9725178,
+    lng: 77.745552,
     address: "Outer Circle, Dodsworth Layout, Whitefield, Bengaluru, Karnataka, India", 
     description: "Zo House Whitefield - Expanding the ecosystem"
   }
