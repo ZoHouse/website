@@ -290,24 +290,6 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
         try {
           // Update map center to user location
           map.current.setCenter(coords);
-          
-                  // Store your coordinates for Zo House Koramangala (no visible marker)
-        // Update Zo House Koramangala coordinates with your exact location
-        const koramangalaHouse = ZO_HOUSES.find(house => house.name === "Zo House Koramangala");
-        if (koramangalaHouse) {
-          koramangalaHouse.lat = coords[1]; // Your latitude
-          koramangalaHouse.lng = coords[0]; // Your longitude
-          console.log(`🏠 Updated Zo House Koramangala coordinates to your exact location!`);
-          
-          // Remove existing Zo House markers and re-add them with updated coordinates
-          zoHouseMarkers.current.forEach(marker => marker.remove());
-          zoHouseMarkers.current = [];
-          
-          // Re-add Zo House markers with updated coordinates
-          setTimeout(() => {
-            addZoHouseMarkers();
-          }, 1000);
-        }
 
           // Create popup content matching the event popup style
           const userPopupContent = `
