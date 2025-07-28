@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
-  mobileWebApp: true,
   appleWebApp: {
     title: 'Zo House',
     statusBarStyle: 'black-translucent',
