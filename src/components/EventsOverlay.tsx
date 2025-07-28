@@ -16,10 +16,9 @@ interface EventsOverlayProps {
   events: EventData[];
   onEventClick?: (event: EventData) => void;
   closeMapPopups?: (() => void) | null;
-  openProfile?: () => void;
 }
 
-const EventsOverlay: React.FC<EventsOverlayProps> = ({ isVisible, events, onEventClick, closeMapPopups, openProfile }) => {
+const EventsOverlay: React.FC<EventsOverlayProps> = ({ isVisible, events, onEventClick, closeMapPopups }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeLocation, setActiveLocation] = useState('all');
   const [filteredEvents, setFilteredEvents] = useState<EventData[]>(events);

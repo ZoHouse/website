@@ -169,11 +169,9 @@ export default function Home() {
         events={events}
         onEventClick={handleEventClick}
         closeMapPopups={closePopupsFn}
-        openProfile={() => setIsProfileOpen(true)}
       />
       <MembersOverlay 
         isVisible={activeSection === 'members'}
-        openProfile={() => setIsProfileOpen(true)}
       />
       <CulturesOverlay isVisible={activeSection === 'cultures'} />
 
