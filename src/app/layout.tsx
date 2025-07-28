@@ -9,20 +9,21 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Zo House Events Map",
-  description: "Interactive map of Zo House events and community members",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Zo House",
-  },
+  title: 'zohm',
+  description: 'Interactive map of Zo House events and community members',
+  manifest: '/manifest.json',
   formatDetection: {
     telephone: false,
   },
+  mobileWebAppCapable: true,
+  appleWebApp: {
+    title: 'Zo House',
+    statusBarStyle: 'black-translucent',
+  },
   icons: {
-    icon: "/icons/icon-192x192.png",
-    apple: "/icons/icon-192x192.png",
+    icon: '/spinner_Z_4.gif',
+    shortcut: '/icons/icon-192x192.png',
+    apple: '/icons/icon-192x192.png',
   },
 };
 
