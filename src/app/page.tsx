@@ -73,43 +73,13 @@ export default function Home() {
           console.log('✅ Loaded', liveEvents.length, 'live events');
           setEvents(liveEvents);
         } else {
-          console.log('⚠️ No live events found, using demo data');
-          // Fallback to demo events if no live events
-          const demoEvents: EventData[] = [
-            {
-              'Event Name': '420 Sesh with Shroo at 4:20 PM',
-              'Date & Time': new Date('2025-07-23T16:20:00').toISOString(),
-              Location: 'Zo House Bangalore (Koramangala), S-1, P-2, Anaa Infra\'s Signature',
-              Latitude: '12.9278',
-              Longitude: '77.6271',
-              'Event URL': 'https://lu.ma/example1'
-            },
-            {
-              'Event Name': 'Zo-work',
-              'Date & Time': new Date('2025-07-24T09:00:00').toISOString(),
-              Location: 'Zo House, 300 4th St, San Francisco, CA 94107, USA',
-              Latitude: '37.7749',
-              Longitude: '-122.4194',
-              'Event URL': 'https://lu.ma/example2'
-            }
-          ];
-          setEvents(demoEvents);
+          console.log('⚠️ No live events found');
+          setEvents([]);
         }
         
       } catch (error) {
         console.error('❌ Error loading live events:', error);
-        // Fallback to demo events on error
-        const demoEvents: EventData[] = [
-          {
-            'Event Name': 'Demo Event - Calendar Loading Failed',
-            'Date & Time': new Date().toISOString(),
-            Location: 'Zo House Bangalore',
-            Latitude: '12.9278',
-            Longitude: '77.6271',
-            'Event URL': 'https://lu.ma/demo'
-          }
-        ];
-        setEvents(demoEvents);
+        setEvents([]);
       } finally {
         setIsLoading(false);
       }

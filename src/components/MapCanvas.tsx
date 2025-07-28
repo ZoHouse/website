@@ -16,15 +16,15 @@ const ZO_HOUSES = [
   },
   {
     name: "Zo House Koramangala",
-    lat: 12.9329578,
-    lng: 77.6319259,
+    lat: 12.933043207450986,
+    lng: 77.63463845876512,
     address: "S-1, P-2, Anaa Infra's Signature Towers, Nirguna Mandir Layout, Cauvery Colony, S.T. Bed, 1st Block Koramangala, Bengaluru, Karnataka 560095, India",
     description: "Zo House Bangalore - Innovation center in India's Silicon Valley"
   },
   {
     name: "Zo House Whitefield",
-    lat: 12.9725178,
-    lng: 77.745552,
+    lat: 12.972625067533576,
+    lng: 77.74648576165846,
     address: "Outer Circle, Dodsworth Layout, Whitefield, Bengaluru, Karnataka, India", 
     description: "Zo House Whitefield - Expanding the ecosystem"
   }

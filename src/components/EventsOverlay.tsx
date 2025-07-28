@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useWallet } from '@/hooks/useWallet';
 
 interface EventData {
   'Event Name': string;
@@ -25,8 +24,6 @@ const EventsOverlay: React.FC<EventsOverlayProps> = ({ isVisible, events, onEven
   const [activeLocation, setActiveLocation] = useState('all');
   const [filteredEvents, setFilteredEvents] = useState<EventData[]>(events);
   const [wasVisible, setWasVisible] = useState(isVisible);
-  
-  const wallet = useWallet();
 
   useEffect(() => {
     if (wasVisible && !isVisible && closeMapPopups) {
@@ -60,11 +57,7 @@ const EventsOverlay: React.FC<EventsOverlayProps> = ({ isVisible, events, onEven
     setFilteredEvents(filtered);
   }, [events, searchTerm, activeLocation]);
 
-  const handleQuantumSync = async () => {
-    if (openProfile) {
-      openProfile();
-    }
-  };
+
 
   const formatDate = (date: string) => new Date(date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
 
@@ -73,18 +66,10 @@ const EventsOverlay: React.FC<EventsOverlayProps> = ({ isVisible, events, onEven
   const renderHeader = () => (
     <div className="flex flex-col gap-4 p-4">
       <div className="text-center">
-        {wallet.isConnected && wallet.address ? (
-          <div className="flex items-center justify-center gap-2">
-            <div className="liquid-glass-button-alt px-4 py-2 font-semibold text-sm">🔗 {wallet.formatAddress(wallet.address)}</div>
-            <button onClick={wallet.disconnectWallet} className="bg-red-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-red-600">✕</button>
-          </div>
-        ) : (
-          <button onClick={handleQuantumSync} disabled={wallet.isLoading} className="liquid-glass-button px-6 py-2 text-sm">
-            {wallet.isLoading ? '🔄 Syncing...' : '🧬 Quantum Sync'}
-          </button>
-        )}
+        <h3 className="text-lg font-bold mb-2">Zo Events</h3>
+        <p className="text-gray-300 text-sm">Discover and join community events</p>
       </div>
-      {wallet.error && <div className="text-red-400 text-xs text-center bg-red-900/50 p-2 rounded-lg">{wallet.error}</div>}
+
       <div className="flex gap-2 justify-center">
         {['all', 'bangalore', 'sanfrancisco'].map(loc => (
           <button key={loc} onClick={() => setActiveLocation(loc)} className={`glass-icon-button px-3 py-2 text-xs font-medium capitalize ${activeLocation === loc ? 'bg-white/20' : ''}`}>
