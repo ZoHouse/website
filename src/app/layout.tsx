@@ -15,10 +15,11 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
-  mobileWebAppCapable: true,
+  mobileWebApp: true,
   appleWebApp: {
     title: 'Zo House',
     statusBarStyle: 'black-translucent',
+    capable: true,
   },
   icons: {
     icon: '/spinner_Z_4.gif',
