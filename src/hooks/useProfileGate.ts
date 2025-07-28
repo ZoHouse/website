@@ -14,6 +14,8 @@ interface MemberProfile {
   created_at?: string;
   lat?: number;
   lng?: number;
+  main_quest_url?: string;
+  side_quest_url?: string;
 }
 
 export function useProfileGate() {
@@ -39,8 +41,8 @@ export function useProfileGate() {
     try {
       const { data, error } = await supabase
         .from('members')
-        .select('name, bio, culture, pfp, founder_nfts_count, calendar_url, created_at, lat, lng')
-        .eq('wallet', address)
+        .select('name, bio, culture, pfp, founder_nfts_count, calendar_url, created_at, lat, lng, main_quest_url, side_quest_url')
+        .eq('wallet', address.toLowerCase())
         .single();
 
       if (error && error.code !== 'PGRST116') {

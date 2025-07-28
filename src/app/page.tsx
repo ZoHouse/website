@@ -8,6 +8,8 @@ import MembersOverlay from '@/components/MembersOverlay';
 import CulturesOverlay from '@/components/CulturesOverlay';
 import ProfileOverlay from '@/components/ProfileOverlay';
 import ProfileSetup from '@/components/ProfileSetup';
+import QuantumSyncOverlay from '@/components/QuantumSyncOverlay';
+import DashboardOverlay from '@/components/DashboardOverlay';
 import { pingSupabase, verifyMembersTable } from '@/lib/supabase';
 import { useProfileGate } from '@/hooks/useProfileGate';
 import { useWallet } from '@/hooks/useWallet';
@@ -25,12 +27,13 @@ interface EventData {
 }
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState<'members' | 'events' | 'cultures'>('events');
+  const [activeSection, setActiveSection] = useState<'members' | 'quantum-sync' | 'events' | 'cultures'>('events');
   const [events, setEvents] = useState<EventData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [closePopupsFn, setClosePopupsFn] = useState<(() => void) | null>(null);
   const [flyToEvent, setFlyToEvent] = useState<EventData | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
   
   // Add profile gate and wallet hooks
   const wallet = useWallet();
@@ -89,7 +92,7 @@ export default function Home() {
     loadLiveEvents();
   }, []);
 
-  const handleSectionChange = (section: 'members' | 'events' | 'cultures') => {
+  const handleSectionChange = (section: 'members' | 'quantum-sync' | 'events' | 'cultures') => {
     console.log('🔄 Switching to section:', section);
     console.log('Previous section was:', activeSection);
     console.log('closePopupsFn available:', !!closePopupsFn);
@@ -102,6 +105,15 @@ export default function Home() {
         // Still switch to members section so the profile setup shows in context
         // The MembersOverlay will handle showing the profile setup popup
       }
+    }
+    
+    // For Quantum Sync section, check if user is already connected with Founder NFT
+    if (section === 'quantum-sync' && wallet.isConnected) {
+      // TODO: Check for Founder NFT here
+      // For now, assume they have it and open dashboard
+      console.log('🚀 User already connected, opening dashboard');
+      setIsDashboardOpen(true);
+      return; // Don't switch to quantum-sync section
     }
     
     // If switching away from events, close any open popups on the map
@@ -172,6 +184,14 @@ export default function Home() {
       />
       <MembersOverlay 
         isVisible={activeSection === 'members'}
+      />
+      <QuantumSyncOverlay 
+        isVisible={activeSection === 'quantum-sync'} 
+        onOpenDashboard={() => setIsDashboardOpen(true)}
+      />
+      <DashboardOverlay 
+        isVisible={isDashboardOpen}
+        onClose={() => setIsDashboardOpen(false)}
       />
       <CulturesOverlay isVisible={activeSection === 'cultures'} />
 

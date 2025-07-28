@@ -1,13 +1,14 @@
 'use client';
 
 interface NavBarProps {
-  onSectionChange: (section: 'members' | 'events' | 'cultures') => void;
-  activeSection: 'members' | 'events' | 'cultures';
+  onSectionChange: (section: 'members' | 'quantum-sync' | 'events' | 'cultures') => void;
+  activeSection: 'members' | 'quantum-sync' | 'events' | 'cultures';
 }
 
 const NavBar: React.FC<NavBarProps> = ({ onSectionChange, activeSection }) => {
   const navItems = [
     { id: 'members' as const, icon: '👥', label: 'Members' },
+    { id: 'quantum-sync' as const, icon: '⚡', label: 'Quantum Sync' },
     { id: 'events' as const, icon: '📅', label: 'Events' },
     { id: 'cultures' as const, icon: '🌍', label: 'Cultures' },
   ];

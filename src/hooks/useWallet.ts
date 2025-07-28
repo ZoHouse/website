@@ -121,7 +121,7 @@ export function useWallet() {
       const { supabase } = await import('@/lib/supabase');
 
       const finalMemberData = {
-        wallet: address,
+        wallet: address.toLowerCase(),
         role,
         name: memberData.name || null, // Use null instead of empty string
         bio: null,                     // This will trigger profile setup

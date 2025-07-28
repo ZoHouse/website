@@ -37,8 +37,8 @@ export async function GET(request: NextRequest) {
 // Check if address owns any NFTs from the Founder contract
 async function checkNFTOwnership(address: string, contractAddress: string): Promise<boolean> {
   try {
-    // Use a public RPC endpoint (you can replace with your preferred RPC)
-    const rpcUrl = 'https://eth-mainnet.g.alchemy.com/v2/demo'; // Replace with your RPC
+    // Use a reliable public RPC endpoint from Cloudflare
+    const rpcUrl = 'https://cloudflare-eth.com';
     
     // ERC721 balanceOf function selector
     const balanceOfABI = [
@@ -59,17 +59,6 @@ async function checkNFTOwnership(address: string, contractAddress: string): Prom
     
   } catch (error) {
     console.error('❌ Error checking NFT ownership:', error);
-    
-    // Fallback: Check if this is a known founder address pattern for your wallet
-    // This ensures your access isn't blocked by RPC issues
-    const isKnownFounder = address.toLowerCase().startsWith('0x3ffc') && 
-                          address.toLowerCase().endsWith('7986');
-    
-    if (isKnownFounder) {
-      console.log('🔄 Using fallback founder verification for known address');
-      return true;
-    }
-    
     return false;
   }
 } 
