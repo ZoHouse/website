@@ -167,15 +167,15 @@ export default function Home() {
       />
 
       {/* Logo/Header */}
-      <div className="absolute top-10 left-1/2 transform -translate-x-1/2 z-20 text-center max-w-[500px]">
+      <div className="absolute top-4 sm:top-10 left-1/2 transform -translate-x-1/2 z-20 text-center max-w-[500px] px-4">
         <img 
           src="/Z_to_House.gif" 
           alt="Zo House Events Calendar" 
           className="h-12 w-auto mx-auto opacity-90 drop-shadow-lg"
         />
-        </div>
+      </div>
 
-      {/* Overlays */}
+      {/* All Overlays */}
       <EventsOverlay 
         isVisible={activeSection === 'events'} 
         events={events}
@@ -189,13 +189,13 @@ export default function Home() {
         isVisible={activeSection === 'quantum-sync'} 
         onOpenDashboard={() => setIsDashboardOpen(true)}
       />
+      <CulturesOverlay isVisible={activeSection === 'cultures'} />
+
+      {/* Global Overlays */}
       <DashboardOverlay 
         isVisible={isDashboardOpen}
         onClose={() => setIsDashboardOpen(false)}
       />
-      <CulturesOverlay isVisible={activeSection === 'cultures'} />
-
-      {/* Profile Popup */}
       <ProfileOverlay 
         isVisible={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
@@ -304,6 +304,25 @@ export default function Home() {
             width: 100%;
             overscroll-behavior: none;
             -webkit-overflow-scrolling: touch;
+          }
+
+          /* Mobile-specific animations */
+          @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+          }
+
+          @keyframes slideDown {
+            from { transform: translateY(0); }
+            to { transform: translateY(100%); }
+          }
+
+          .mobile-sheet-enter {
+            animation: slideUp 0.3s ease-out;
+          }
+
+          .mobile-sheet-exit {
+            animation: slideDown 0.3s ease-in;
           }
         }
       `}</style>
