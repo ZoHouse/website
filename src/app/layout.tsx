@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Comic_Neue } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const comicNeue = Comic_Neue({
   subsets: ["latin"],
-  variable: '--font-space-grotesk',
+  variable: '--font-comic-neue',
   display: 'swap',
+  weight: ['400', '700']
 });
 
 export const metadata: Metadata = {
@@ -43,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.className} antialiased bg-black text-white`}>
+      <body className={`${comicNeue.className} paper-ui antialiased bg-black text-white`}>
         {children}
       </body>
     </html>

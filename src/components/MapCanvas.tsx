@@ -131,16 +131,16 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
           <p>📍 ${house.address}</p>
           <p>✨ ${house.description}</p>
           <div style="margin-top: 16px;">
-            <button onclick="window.open('https://zo.house', '_blank')" class="solid-button">
+            <button onclick="window.open('https://zo.house', '_blank')" class="paper-button">
               Visit Website
             </button>
           </div>
         `;
 
         const zoPopup = new mapboxgl.Popup({
-          className: 'glass-popup-container',
+          className: 'paper-card',
           closeButton: true,
-          offset: [0, -45], // Higher offset due to larger marker
+          offset: [0, -45],
           maxWidth: '320px'
         }).setHTML(zoPopupContent);
 
@@ -298,8 +298,8 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
             <p>📱 Auto-detected via GPS</p>
           `;
 
-          const userPopup = new mapboxgl.Popup({ 
-            className: 'glass-popup-container',
+          const userPopup = new mapboxgl.Popup({
+            className: 'paper-card',
             closeButton: true,
             offset: [0, -15],
             maxWidth: '280px'
@@ -410,13 +410,13 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
           <p>📍 ${event.Location || "N/A"}</p>
           ${event['Event URL'] ? `
             <div style="margin-top: 16px;">
-              <a href="${event['Event URL']}" target="_blank" class="solid-button">Register</a>
+              <a href="${event['Event URL']}" target="_blank" class="paper-button">Register</a>
             </div>
           ` : ''}
         `;
 
         const popup = new mapboxgl.Popup({
-            className: 'glass-popup-container',
+            className: 'paper-card',
             closeButton: true,
             offset: [0, -15],
             maxWidth: '280px'
@@ -483,7 +483,7 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
       }
       
       // Fly to the event location
-      map.current.flyTo({
+      map.current.jumpTo({
         center: [lng, lat],
         zoom: 18,
       });

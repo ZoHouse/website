@@ -93,36 +93,11 @@ export default function Home() {
   }, []);
 
   const handleSectionChange = (section: 'members' | 'quantum-sync' | 'events' | 'cultures') => {
-    console.log('🔄 Switching to section:', section);
-    console.log('Previous section was:', activeSection);
-    console.log('closePopupsFn available:', !!closePopupsFn);
-    
-    // For Members section, check profile gate first
-    if (section === 'members' && wallet.isConnected) {
-      const hasAccess = profileGate.checkProfileAccess();
-      if (!hasAccess) {
-        console.log('🚨 Profile setup required for Members section');
-        // Still switch to members section so the profile setup shows in context
-        // The MembersOverlay will handle showing the profile setup popup
-      }
+    if (section === 'quantum-sync') {
+      setIsProfileOpen(true);
+    } else {
+      setActiveSection(section);
     }
-    
-    // For Quantum Sync section, check if user is already connected with Founder NFT
-    if (section === 'quantum-sync' && wallet.isConnected) {
-      // TODO: Check for Founder NFT here
-      // For now, assume they have it and open dashboard
-      console.log('🚀 User already connected, opening dashboard');
-      setIsDashboardOpen(true);
-      return; // Don't switch to quantum-sync section
-    }
-    
-    // If switching away from events, close any open popups on the map
-    if (section !== 'events' && closePopupsFn) {
-      console.log('📍 Calling closePopupsFn because switching away from events');
-      closePopupsFn();
-    }
-    
-    setActiveSection(section);
   };
 
   const handleEventClick = (event: EventData) => {

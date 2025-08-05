@@ -11,13 +11,29 @@
   --glass-bg: rgba(28, 28, 30, 0.8);
   --glass-border: rgba(255, 255, 255, 0.1);
   --font-sans: 'Space Grotesk', sans-serif;
+
+  /* Paper UI Variables */
+  --paper-bg: #f4f4f4;
+  --paper-ink: #1a1a1a;
+  --paper-stroke: #333;
+  --paper-font: 'Comic Neue', 'Comic Sans MS', cursive;
 }
+
 
 body {
   background-color: var(--background-dark);
   color: var(--foreground-light);
   font-family: var(--font-sans);
 }
+
+.paper-ui {
+  background-color: var(--paper-bg);
+  background-image: radial-gradient(var(--paper-stroke) 1px, transparent 0);
+  background-size: 20px 20px;
+  color: var(--paper-ink);
+  font-family: var(--paper-font);
+}
+
 
 /* Modern Glass Utilities */
 .liquid-glass-pane {
@@ -47,25 +63,22 @@ body {
 }
 
 .solid-button {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-  color: white;
-  text-decoration: none;
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-shadow: none;
-  box-shadow: 0 4px 12px rgba(0, 132, 255, 0.3);
-  transition: all 0.3s ease;
+  background: linear-gradient(to right, #007cf0, #00dfd8);
   border: none;
-  cursor: pointer;
+  color: white;
+  padding: 12px 24px;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .solid-button:hover {
+  box-shadow: 0 4px 15px rgba(0, 223, 216, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 132, 255, 0.4);
 }
 
 .glass-icon-button {
@@ -86,43 +99,9 @@ h1, h2, h3 {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Mapbox Popup Styles - UPDATED */
-.glass-popup-container .mapboxgl-popup-content {
-  background: rgba(0, 0, 0, 0.9) !important;
-  backdrop-filter: blur(25px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 16px !important;
-  color: var(--foreground-light) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
-  padding: 20px !important;
-  font-family: var(--font-sans) !important;
-}
-
-.glass-popup-container .mapboxgl-popup-close-button {
-  color: white !important;
-  font-size: 20px !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-radius: 50% !important;
-  width: 30px !important;
-  height: 30px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-.glass-popup-container h3 {
-  color: white !important;
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
-  margin-bottom: 8px !important;
-}
-
-.glass-popup-container p {
-  color: rgba(255, 255, 255, 0.8) !important;
-  font-size: 0.9rem !important;
-  margin: 4px 0 !important;
+h1, h2, h3 {
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* Hide mapbox controls on mobile */
@@ -185,7 +164,37 @@ h1, h2, h3 {
   z-index: 1000 !important;
 }
 
-/* Tailwind utility classes for markers */
+/* Paper UI Navbar */
+.paper-nav {
+  background-color: var(--paper-bg);
+  border: 2px solid var(--paper-ink);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 5px 5px 0px var(--paper-ink);
+}
+
+.paper-nav-item {
+  font-family: var(--paper-font);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--paper-ink);
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+.paper-nav-item:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.paper-nav-item.active {
+  background-color: var(--paper-ink);
+  color: var(--paper-bg);
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+}
+
 .w-12 {
   width: 3rem;
 }
@@ -348,4 +357,87 @@ h1, h2, h3 {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Paper UI Overlays */
+.paper-overlay {
+  background-color: var(--paper-bg);
+  border: 2px solid var(--paper-ink);
+  border-radius: 24px;
+  box-shadow: 8px 8px 0px var(--paper-ink);
+  padding: 24px;
+  color: var(--paper-ink);
+}
+
+.paper-card {
+  border: 2px solid var(--paper-ink);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+.paper-card:hover {
+  box-shadow: 4px 4px 0px var(--paper-ink);
+  transform: translate(-4px, -4px);
+}
+
+.paper-button {
+  font-family: var(--paper-font);
+  font-weight: 700;
+  background-color: var(--paper-ink);
+  color: var(--paper-bg);
+  border: 2px solid var(--paper-ink);
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.paper-button:hover {
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  transform: translate(2px, 2px);
+}
+
+.paper-button:active {
+  box-shadow: 0px 0px 0px rgba(0,0,0,0.2);
+  transform: translate(4px, 4px);
+}
+
+.paper-input {
+  font-family: var(--paper-font);
+  font-size: 1rem;
+  padding: 12px 16px;
+  border: 2px solid var(--paper-ink);
+  border-radius: 12px;
+  background-color: var(--paper-bg);
+  color: var(--paper-ink);
+  transition: all 0.2s ease-in-out;
+}
+
+.paper-input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0px var(--paper-ink);
+}
+
+/* Paper UI Profile */
+.paper-profile-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.paper-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--paper-ink);
+  margin: 0 auto 16px;
+  box-shadow: 6px 6px 0px var(--paper-ink);
+}
+
+.paper-profile-body {
+  border: 2px solid var(--paper-ink);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
 }

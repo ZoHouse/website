@@ -95,12 +95,10 @@ export function useProfileGate() {
 
 
 
-  const completeProfileSetup = async () => {
+  const completeProfileSetup = (newData: Partial<MemberProfile>) => {
     setShowProfileSetup(false);
-    // Wait a moment for state to update, then reload profile
-    setTimeout(async () => {
-      await loadMemberProfile();
-    }, 100);
+    // Optimistically update the profile
+    setMemberProfile(prev => ({ ...prev, ...newData, name: newData.name || prev?.name || '' }));
   };
 
   return {
