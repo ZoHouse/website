@@ -482,10 +482,13 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
         currentOpenPopup.remove();
       }
       
-      // Fly to the event location
-      map.current.jumpTo({
+      // Fly to the event location with smooth animation
+      map.current.flyTo({
         center: [lng, lat],
         zoom: 18,
+        speed: 1.2,
+        curve: 1.4,
+        easing: (t: number) => t
       });
 
       // Find the marker for this event and open its popup
