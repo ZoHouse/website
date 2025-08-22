@@ -141,7 +141,8 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
           className: 'paper-card',
           closeButton: true,
           offset: [0, -45],
-          maxWidth: '320px'
+          maxWidth: '320px',
+          anchor: 'bottom'
         }).setHTML(zoPopupContent);
 
         zoMarker.setPopup(zoPopup);
@@ -302,7 +303,8 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
             className: 'paper-card',
             closeButton: true,
             offset: [0, -15],
-            maxWidth: '280px'
+            maxWidth: '280px',
+            anchor: 'bottom'
           }).setHTML(userPopupContent);
           
           // Show popup briefly
@@ -419,7 +421,8 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
             className: 'paper-card',
             closeButton: true,
             offset: [0, -15],
-            maxWidth: '280px'
+            maxWidth: '280px',
+            anchor: 'bottom'
           })
           .setLngLat([lng, lat])
           .setHTML(popupContent);
@@ -482,6 +485,10 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
         currentOpenPopup.remove();
       }
       
+      // Find the marker for this event first
+      const eventKey = `${flyToEvent['Event Name']}-${flyToEvent.Latitude}-${flyToEvent.Longitude}`;
+      const marker = markersMap.get(eventKey);
+      
       // Fly to the event location with smooth animation
       map.current.flyTo({
         center: [lng, lat],
@@ -491,23 +498,31 @@ export default function MapCanvas({ events, onMapReady, flyToEvent, className }:
         easing: (t: number) => t
       });
 
-      // Find the marker for this event and open its popup
-      const eventKey = `${flyToEvent['Event Name']}-${flyToEvent.Latitude}-${flyToEvent.Longitude}`;
-      const marker = markersMap.get(eventKey);
-      
+      // Show popup only after fly animation completes
       if (marker) {
         const popup = marker.getPopup();
         if (popup && map.current) {
-          popup.addTo(map.current!);
-          setCurrentOpenPopup(popup);
-          activePopups.current.add(popup); // Add to tracked popups
+          const onMoveEnd = () => {
+            // Small delay for polish after animation completes
+            setTimeout(() => {
+              popup.addTo(map.current!);
+              setCurrentOpenPopup(popup);
+              activePopups.current.add(popup); // Add to tracked popups
+              
+              popup.on('close', () => {
+                if (currentOpenPopup === popup) {
+                  setCurrentOpenPopup(null);
+                  activePopups.current.delete(popup); // Remove from tracked popups
+                }
+              });
+            }, 150); // Small delay for polish
+            
+            // Remove the event listener after use
+            map.current?.off('moveend', onMoveEnd);
+          };
           
-          popup.on('close', () => {
-            if (currentOpenPopup === popup) {
-              setCurrentOpenPopup(null);
-              activePopups.current.delete(popup); // Remove from tracked popups
-            }
-          });
+          // Listen for fly animation completion
+          map.current.on('moveend', onMoveEnd);
         }
       }
     } catch (error) {

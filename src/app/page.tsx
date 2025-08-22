@@ -219,6 +219,12 @@ export default function Home() {
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
+        /* Disable default mapbox popup animations - appear directly at pin */
+        .paper-card .mapboxgl-popup-content {
+          animation: none !important;
+          transform: none !important;
+        }
+
         .glass-popup h3 {
           margin: 0 0 8px 0;
           color: #2a251d;
